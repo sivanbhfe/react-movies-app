@@ -1,9 +1,10 @@
-import React, {Component} from './node_modules/react';
+import React, {Component} from 'react';
 import './Home.css';
+import Header from '../../common/header/Header';
 
 class Home extends Component{
-    render(){
-        return(<div>From Home</div>});
+    render(){   
+        return(<Header />);
     }
 }
 
