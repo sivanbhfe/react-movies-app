@@ -24,7 +24,7 @@ transform: 'translate(-50%, -50%)'
 };
 
 const TabContainer = function(props){
-return(<Typography component="div" style={{padding:0}}>
+return(<Typography component="div" style={{padding:0, textAlign:'center'}}>
     {props.children}
 </Typography>); 
 }
@@ -65,19 +65,20 @@ return(
     </header>  
     <Modal style={customStyles} ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" 
     onRequestClose={this.modalCloseHandler}>
-        <Tabs value={this.state.value} onChange={this.tabChangeHandler}>
-            <Tab label="Login" />
+        <Tabs className="tabs" value={this.state.value} onChange={this.tabChangeHandler}>
+            <Tab label="Login"/>
             <Tab label="Register" />
         </Tabs>
-        <TabContainer>
+        <TabContainer className="tabcontainer">
             <FormControl required>
-                <InputLabel htmlFor="userName">UserName</InputLabel>
+                <InputLabel  htmlFor="userName">UserName</InputLabel>
                 <Input id="userName" type="text"/>
-            </FormControl>
+            </FormControl><br /><br />
             <FormControl required>
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input id="password" type="password"/>
-            </FormControl>
+            </FormControl><br /><br />
+            <Button variant="contained" color="primary">LOGIN</Button>
         </TabContainer>
   
     </Modal>
