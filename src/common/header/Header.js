@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import PropTypes from 'prop-types';
 
 const customStyles = {
 content:{
@@ -28,6 +29,8 @@ return(<Typography component="div" style={{padding:0, textAlign:'center'}}>
     {props.children}
 </Typography>); 
 }
+
+TabContainer.propTypes = {children: PropTypes.node.isRequired};
 
 // const Tellit = function (props){
 //     return(<p>{props.id}</p>);
@@ -69,6 +72,7 @@ return(
             <Tab label="Login"/>
             <Tab label="Register" />
         </Tabs>
+        {this.state.value==0 &&
         <TabContainer className="tabcontainer">
             <FormControl required>
                 <InputLabel  htmlFor="userName">UserName</InputLabel>
@@ -80,7 +84,20 @@ return(
             </FormControl><br /><br />
             <Button variant="contained" color="primary">LOGIN</Button>
         </TabContainer>
-  
+        };
+                {this.state.value==1 &&
+        <TabContainer className="tabcontainer">
+            <FormControl required>
+                <InputLabel  htmlFor="userName">Enter a UserName</InputLabel>
+                <Input id="enterUserName" type="text"/>
+            </FormControl><br /><br />
+            <FormControl required>
+                <InputLabel htmlFor="password">Enter a Password</InputLabel>
+                <Input id="enterPassword" type="password"/>
+            </FormControl><br /><br />
+            <Button variant="contained" color="primary">LOGIN</Button>
+        </TabContainer>
+        };
     </Modal>
 </div>);
 }
