@@ -24,3 +24,14 @@
 .tabcontainer{
    margin-left: 60px;
 }
+.dispNone{
+    display:none;
+}
+
+.dispBlock{
+    display:block;
+}
+
+.red{
+    color:red;
+}

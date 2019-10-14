@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import PropTypes from 'prop-types';
 
 const customStyles = {
@@ -40,7 +41,11 @@ class Header extends Component{
 
 constructor(){
 super();
-this.state= {modalIsOpen:false, value:0};
+this.state= {
+    modalIsOpen:false, 
+    value:0, 
+    username:"",
+    usernameRequired:"dispNone"};
 }
 
 modalOpenHandler = ()=>{
@@ -53,6 +58,15 @@ this.setState({modalIsOpen: false});
 
 tabChangeHandler = (event, value) => {
 this.setState({value});
+}
+
+loginClickHandler = () => {
+    this.state.username === "" ? this.setState({usernameRequired:"dispBlock"}) : 
+    this.setState({usernameRequired:"dispNone"});
+}
+
+inputUserNameChangeHandler = (e) => {
+    this.setState({username: e.target.value});
 }
 
 render(){   
@@ -76,15 +90,17 @@ return(
         <TabContainer className="tabcontainer">
             <FormControl required>
                 <InputLabel  htmlFor="userName">UserName</InputLabel>
-                <Input id="userName" type="text"/>
+                <Input id="userName" type="text" username={this.state.username} onChange={this.inputUserNameChangeHandler}/>
+                <FormHelperText className={this.state.usernameRequired}><span className="red">required</span></FormHelperText>
             </FormControl><br /><br />
             <FormControl required>
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input id="password" type="password"/>
+                <FormHelperText className={this.state.usernameRequired}>required</FormHelperText>
             </FormControl><br /><br />
-            <Button variant="contained" color="primary">LOGIN</Button>
+            <Button variant="contained" color="primary" onClick={this.loginClickHandler}>LOGIN</Button>
         </TabContainer>
-        };
+        }
                 {this.state.value==1 &&
         <TabContainer className="tabcontainer">
             <FormControl required>
@@ -97,7 +113,7 @@ return(
             </FormControl><br /><br />
             <Button variant="contained" color="primary">LOGIN</Button>
         </TabContainer>
-        };
+        }
     </Modal>
 </div>);
 }
