@@ -44,12 +44,43 @@ super();
 this.state= {
     modalIsOpen:false, 
     value:0, 
-    username:"",
-    usernameRequired:"dispNone"};
+    username: "",
+    password: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    contact: "",
+    passwordregister: "",
+    usernameRequired: "dispNone",
+    passwordRequired: "dispNone",
+    firstnameRequired: "dispNone",
+    lastnameRequired: "dispNone",
+    emailRequired: "dispNone",
+    passwordregisterRequired : "dispNone",
+    contactRequired : "dispNone"
+};
 }
 
 modalOpenHandler = ()=>{
 this.setState({modalIsOpen: true});
+this.setState({
+    modalIsOpen: true,
+    value: 0,
+    usernameRequired: "dispNone",
+    passwordRequired: "dispNone",
+    firstnameRequired: "dispNone",
+    lastnameRequired: "dispNone",
+    emailRequired: "dispNone",
+    passwordregisterRequired : "dispNone",
+    contactRequired : "dispNone",
+    username: "",
+    password: "",
+    firstname: "",
+    lastname: "",
+    email:"",
+    passwordregister: "",
+    contact: ""
+});
 }
 
 modalCloseHandler = ()=>{
@@ -60,14 +91,65 @@ tabChangeHandler = (event, value) => {
 this.setState({value});
 }
 
+// Onclick of LOGIN button
 loginClickHandler = () => {
     this.state.username === "" ? this.setState({usernameRequired:"dispBlock"}) : 
     this.setState({usernameRequired:"dispNone"});
+
+    this.state.password === "" ? this.setState({passwordRequired:"dispBlock"}) : 
+    this.setState({passwordRequired:"dispNone"});
+
 }
 
+// Onclick of REGISTER button
+registerClickHandler = () => {
+    this.state.firstname === "" ? this.setState({firstnameRequired:"dispBlock"}) : 
+    this.setState({firstnameRequired:"dispNone"});
+
+    this.state.lastname === "" ? this.setState({lastnameRequired:"dispBlock"}) : 
+    this.setState({lastnameRequired:"dispNone"});
+
+    this.state.email === "" ? this.setState({emailRequired:"dispBlock"}) : 
+    this.setState({emailRequired:"dispNone"});
+
+    this.state.passwordregister === "" ? this.setState({passwordregisterRequired:"dispBlock"}) : 
+    this.setState({passwordregisterRequired:"dispNone"});
+
+    this.state.contact === "" ? this.setState({contactRequired:"dispBlock"}) : 
+    this.setState({contactRequired:"dispNone"});
+}
+
+// LOGIN form elements
 inputUserNameChangeHandler = (e) => {
     this.setState({username: e.target.value});
 }
+
+inputPasswordChangeHandler = (e) => {
+    this.setState({password: e.target.value});   
+}
+
+// REGISTER form elements
+inputFirstNameChangeHandler = (e) => {
+    this.setState({firstname: e.target.value});
+}
+
+inputLastNameChangeHandler = (e) => {
+    this.setState({lastname: e.target.value});
+}
+
+emailChangeHandler = (e) => {
+    this.setState({email: e.target.value});
+}
+
+passwordregisterChangeHandler = (e) => {
+    this.setState({passwordregister: e.target.value});
+}
+
+contactChangeHandler = (e) => {
+    this.setState({contact: e.target.value});
+}
+
+// render method starts
 
 render(){   
 return(
@@ -95,8 +177,8 @@ return(
             </FormControl><br /><br />
             <FormControl required>
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <Input id="password" type="password"/>
-                <FormHelperText className={this.state.usernameRequired}>required</FormHelperText>
+                <Input id="password" type="password" password={this.state.password} onChange={this.inputPasswordChangeHandler}/>
+                <FormHelperText className={this.state.passwordRequired}><span className="red">required</span></FormHelperText>
             </FormControl><br /><br />
             <Button variant="contained" color="primary" onClick={this.loginClickHandler}>LOGIN</Button>
         </TabContainer>
@@ -104,14 +186,31 @@ return(
                 {this.state.value==1 &&
         <TabContainer className="tabcontainer">
             <FormControl required>
-                <InputLabel  htmlFor="userName">Enter a UserName</InputLabel>
-                <Input id="enterUserName" type="text"/>
+                <InputLabel  htmlFor="userName">First Name</InputLabel>
+                <Input id="firstName" type="text" firstname={this.state.firstname} onChange={this.inputFirstNameChangeHandler}/>
+                <FormHelperText className={this.state.firstnameRequired}><span className="red">required</span></FormHelperText>
             </FormControl><br /><br />
             <FormControl required>
-                <InputLabel htmlFor="password">Enter a Password</InputLabel>
-                <Input id="enterPassword" type="password"/>
+                <InputLabel  htmlFor="lastName">Last Name</InputLabel>
+                <Input id="lastName" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler}/>
+                <FormHelperText className={this.state.lastnameRequired}><span className="red">required</span></FormHelperText>
             </FormControl><br /><br />
-            <Button variant="contained" color="primary">LOGIN</Button>
+            <FormControl required>
+                <InputLabel  htmlFor="email">Email</InputLabel>
+                <Input id="email" type="text" email={this.state.email} onChange={this.emailChangeHandler}/>
+                <FormHelperText className={this.state.emailRequired}><span className="red">required</span></FormHelperText>
+            </FormControl><br /><br />
+            <FormControl required>
+                <InputLabel  htmlFor="passwordregister">Password</InputLabel>
+                <Input id="passwordregister" type="password" passwordregister={this.state.passwordregister} onChange={this.passwordregisterChangeHandler}/>
+                <FormHelperText className={this.state.passwordregisterRequired}><span className="red">required</span></FormHelperText>
+            </FormControl><br /><br />
+            <FormControl required>
+                <InputLabel  htmlFor="contact">Contact No.</InputLabel>
+                <Input id="contact" type="text" contact={this.state.contact} onChange={this.contactChangeHandler}/>
+                <FormHelperText className={this.state.contactRequired}><span className="red">required</span></FormHelperText>
+            </FormControl><br /><br />
+            <Button variant="contained" color="primary" onClick={this.registerClickHandler}>REGISTER</Button>
         </TabContainer>
         }
     </Modal>
