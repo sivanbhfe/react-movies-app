@@ -1,4 +1,4 @@
-let moviesData = [
+let moviesData = [ 
     {
         "id": "M1",
         "title": "The Godfather",
