@@ -3,10 +3,19 @@ import './Home.css';
 import Header from '../../common/header/Header';
 import { withStyles } from '@material-ui/core/styles';
 import moviesData from '../../assets/movieData';
+import Genres from '../../commong/Genres';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { Grid } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import FormControl from '@material-ui/core/FormControl';
+import Typography from '@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const styles = theme => ({
     root: {
@@ -27,10 +36,31 @@ const styles = theme => ({
     gridListReleasedMovies: {
         transform:"translateZ(0)",
         width: "60%"
-    }
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 240,
+        maxWidth: 240
+     },
+     title: {
+        color: theme.palette.primary.light,
+     }
 });
 
 class Home extends Component{
+
+    constructor() {
+        super();
+        this.state = {
+            movieName: "",
+            genres:[]
+        }
+    }
+
+
+    movieNameChangeHandler = e => {
+        this.setState({movieName: e.target.value});
+    }
     render(){
         const {classes} = this.props;   
         return(
@@ -62,6 +92,27 @@ class Home extends Component{
                         </GridList>
                     </div>
                     <div className="right">
+                        <Card>
+                            <CardContent>
+                                <FormControl className={classes.formControl}>
+                                    <Typography className={classes.Typography} color="textSecondary">
+                                        FIND MOVIES BY:
+                                    </Typography>
+                                </FormControl>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="movieName">Movie Name</InputLabel>
+                                    <Input id="movieName" onChange={this.movieNameChangeHandler}></Input>
+                                </FormControl>
+                                <FormControl>
+                                    <InputLabel htmlFor="select-multiple-checkbox">Genre</InputLabel>
+                                    <Select multiple 
+                                    input={<Input id="select-multiple-checkbox"/>}
+                                    renderValue={selected =>selected.join(',')}
+                                    value={this.state.genres}
+                                    onChange={this.genreSelectHandler}></Select>
+                                </FormControl>
+                            </CardContent>
+                        </Card>
                         </div>
             </div>
             </div>
