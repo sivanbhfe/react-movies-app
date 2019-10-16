@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import './Home.css';
 import Header from '../../common/header/Header';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,6 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     root: {
@@ -74,6 +76,10 @@ class Home extends Component{
         this.setState({artists: e.target.value});
     }
 
+    applyClickHandler = e => {
+
+    }
+
     render(){
         const {classes} = this.props;   
         return(
@@ -94,7 +100,7 @@ class Home extends Component{
                     <div className="left">
                         <GridList cellHeight={350} cols={4} className={classes.gridListMain}>
                             {moviesData.map(movie => (
-                                <GridListTile className="released-movie-grid-item" key={"grid" + movie.id}>
+                                <GridListTile onClick={()=>this.movieClickHandler(movie.id)} className="released-movie-grid-item" key={"grid" + movie.id}>
                                     <img src={movie.poster_url} className="movie-poster" alt={movie.title} />
                                     <GridListTileBar
                                         title={movie.title}
@@ -160,6 +166,7 @@ class Home extends Component{
                                     defaultValue=""
                                     InputLabelProps={{shrink: true}}/>
                                 </FormControl>
+                                <Button className="applyButton" variant="contained" color="primary" onClick={this.applyClickHandler}>APPLY</Button>
                             </CardContent>
                         </Card>
                         </div>

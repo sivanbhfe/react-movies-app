@@ -37,6 +37,11 @@ background: grey;
     width: 24%;
 }
 
+.applyButton {
+    width: 90%;
+    height:40px;
+}
+
 .released-movie-grid-item {
     margin: 15px;
 }
