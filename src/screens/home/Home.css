@@ -24,7 +24,7 @@ background: grey;
     display: flex;
 }
 
-.flex-container>div {
+.flex-container {
     margin: 16px;
 }
 
