@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import moviesData from '../../assets/movieData';
 import genres from '../../common/genres';
 import artists from '../../common/artists';
+import Details from '../details/Details';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -78,6 +79,10 @@ class Home extends Component{
 
     applyClickHandler = e => {
 
+    }
+
+    movieClickHandler = (movieId) => {
+        ReactDOM.render(<Details movieId={movieId}/>,document.getElementById('root'));
     }
 
     render(){
