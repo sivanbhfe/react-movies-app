@@ -61,7 +61,7 @@
   display: flex;
 }
 
-.flex-containerDetails>div {
+.flex-containerDetails {
   margin: 0px 16px;
 }
 
