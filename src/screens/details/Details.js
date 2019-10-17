@@ -32,10 +32,14 @@ render(){
             <div className="middleDetails">
             <div>
                     <Typography variant="headline" component="h2">{movie.title}</Typography>
-                </div>
+                </div><br />
                 
                 <div>
-                    <Typography><span className="bold">Genre: </span>{movie.genres.join(',')}</Typography>
+                    <Typography><span className="bold">Genres: </span>{movie.genres.join(',')}</Typography>
+                    <Typography><span className="bold">Duration: </span>{movie.duration}</Typography>
+                    <Typography><span className="bold">Release Date: </span>{movie.release_date}</Typography>
+                    <Typography><span className="bold">Rating: </span>{movie.critics_rating}</Typography><br />
+                    <Typography><span className="bold">Plot: </span><a href={movie.wiki_url}>(Wiki Link)</a><span> </span>{movie.storyline}</Typography>
                 </div>
             </div>
             <div className="rightDetails">
