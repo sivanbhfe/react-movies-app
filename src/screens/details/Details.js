@@ -6,6 +6,9 @@ import Header from '../../common/header/Header';
 import Home from '../home/Home';
 import moviesData from '../../assets/movieData';
 import Typography from '@material-ui/core/Typography';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 class Details extends Component {
     constructor(){
@@ -28,13 +31,16 @@ class Details extends Component {
     {
         ReactDOM.render(<Home/>, document.getElementById("root"));
     }
+    artistOnClickHandler = (url) => {
+        window.location=url;
 
+    }
 render(){
     let movie = this.state.movie;
     const opts = {
         height: '300',
         width: '700',
-        playerVars: {autoplay: 1}
+        playerVars: {autoplay: 0}
     }
 
     return(<div className="details">
@@ -70,7 +76,19 @@ render(){
                 </div>
             </div>
             <div className="rightDetails">
-                
+            <Typography><span className="bold">Artists: </span></Typography>
+            <div>
+            <GridList cellHeight={160} cols={2} >
+                            {movie.artists.map(artist => (
+                                <GridListTile onClick={()=>this.artistOnClickHandler(artist.wiki_url)} key={"artist" + artist.id}>
+                                    <img width='140px' height='150px' src={artist.profile_url} alt={artist.first_name+ " "+artist.first_name+ " "+artist.last_name} />
+                                    <GridListTileBar
+                                        title={artist.first_name+ " "+artist.last_name}
+                                    />
+                                </GridListTile>
+                            ))}
+                        </GridList>
+            </div>
             </div>
 
         </div>
