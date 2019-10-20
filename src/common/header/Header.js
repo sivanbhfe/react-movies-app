@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import './Header.css';
 import logo from '../../assets/logo.svg';
 import Modal from 'react-modal';
-
+import BookShow from '../../screens/bookshow/BookShow';
 //From Material-UI
 import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
@@ -149,6 +150,10 @@ contactChangeHandler = (e) => {
     this.setState({contact: e.target.value});
 }
 
+bookshowHandler = () => {
+    ReactDOM.render(<BookShow />, document.getElementById('root'));
+}
+
 // render method starts
 
 render(){   
@@ -161,6 +166,12 @@ return(
                 Login
             </Button>   
         </div>
+        {this.props.showBookShowButton==="true" ? 
+        <div className="bookshow-button">
+            <Button onClick={this.bookshowHandler} variant="contained" color="primary">
+                BOOK SHOW
+            </Button>   
+        </div> : ""}
     </header>  
     <Modal style={customStyles} ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel="Login" 
     onRequestClose={this.modalCloseHandler}>

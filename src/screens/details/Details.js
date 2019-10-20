@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 import ReactDOM from 'react-dom';
 import './Details.css';
 import Header from '../../common/header/Header';
-import Home from '../home/Home';
+import Home from '../../screens/home/Home';
 import moviesData from '../../assets/movieData';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
@@ -57,8 +57,9 @@ class Details extends Component {
 
     backtohomeHandler =() =>
     {
-        ReactDOM.render(<Home/>, document.getElementById("root"));
+        ReactDOM.render(<Home />, document.getElementById("root"));
     }
+
     artistOnClickHandler = (url) => {
         window.location=url;
 
@@ -87,7 +88,7 @@ render(){
     }
 
     return(<div className="details">
-        <Header/>
+        <Header showBookShowButton="true"/>
         <div className="back">
             <Typography onClick={this.backtohomeHandler}>
                 &#60; Back to Home
