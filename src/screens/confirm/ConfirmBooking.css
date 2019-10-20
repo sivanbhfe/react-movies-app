@@ -1,0 +1,31 @@
+.confirmContainer{
+    text-align: center;
+}
+
+.cardStyle {
+    width: 280px;
+    padding: 32px 64px 32px 64px;
+    margin: auto;
+    text-align: left;
+}
+.bold {
+    font-weight: bold;
+}
+.bigger {
+    font-size: 20px;
+}
+.green{
+    color:rgb(68,159,71);
+}
+.backModal{
+    background-color: rgb(49,49,49);
+}
+.closeButton {
+    color:white;
+    float:right;
+    font-size: 20px;
+}
+.fontSize{
+
+    font-size: 30px;
+}

@@ -10,6 +10,7 @@ import language from '../../common/language';
 import location from '../../common/location';
 import showDate from '../../common/showDate';
 import showTime from '../../common/showTime';
+import ConfirmBooking from '../confirm/ConfirmBooking';
 
 //CSS files
 import './BookShow.css';
@@ -23,9 +24,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import ListItemText from '@material-ui/core/ListItemText';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
 
 class BookShow extends Component {
 
@@ -38,7 +39,13 @@ showDate: "",
 showTime: "",
 tickets: 0,
 availableTickets: 20,
-unitPrice: 500
+totalPrice: 0,
+unitPrice: 500,
+locationRequired:"invisible",
+languageRequired:"invisible",
+showDateRequired:"invisible",
+showTimeRequired:"invisible",
+ticketsRequired:"invisible"
 }
 }
 
@@ -72,7 +79,34 @@ tikcetsChangeHandler = event =>
     this.setState({tickets:event.target.value});
 }
 
-render(){
+bookShowButtonHandler = event =>
+{
+  /*  if(this.state.location===""){
+        this.setState({locationRequired: ""});
+    } else {
+        this.setState({locationRequired: "invisible"});
+    }*/
+
+ if(this.state.location==="" || this.state.language===""||
+    this.state.showDate===""||this.state.showTime==="" || this.state.tickets === 0){
+        this.state.location === "" ? this.setState({ locationRequired: "" }) : this.setState({ locationRequired: "invisible" });
+        this.state.language === "" ? this.setState({ languageRequired: "" }) : this.setState({ languageRequired: "invisible" });
+        this.state.showDate === "" ? this.setState({ showDateRequired: "" }) : this.setState({ showDateRequired: "invisible" });
+        this.state.showTime === "" ? this.setState({ showTimeRequired: "" }) : this.setState({ showTimeRequired: "invisible" });
+        this.state.tickets === 0 ? this.setState({ ticketsRequired: "" }) : this.setState({ ticketsRequired: "invisible" });
+ } else {
+    ReactDOM.render(<ConfirmBooking location={this.state.location}
+                    language={this.state.language}
+                    showDate={this.state.showDate}
+                    showTime={this.state.showTime}
+                    tickets={this.state.tickets}
+                    totalPrice={this.state.unitPrice * this.state.tickets}
+                    />, 
+        document.getElementById("root"));
+ }
+    }
+
+render() {
 return(
 
 <div>
@@ -100,6 +134,7 @@ return(
                         </MenuItem>
                     ))}
                 </Select>
+                <FormHelperText className={this.state.locationRequired}><span className="red">required</span></FormHelperText>
             </FormControl>  
             <FormControl required className="formControl">
                 <InputLabel htmlFor="language">Choose Language:</InputLabel>
@@ -112,6 +147,7 @@ return(
                         </MenuItem>
                     ))}
                 </Select>
+                <FormHelperText className={this.state.languageRequired}><span className="red">required</span></FormHelperText>
             </FormControl>
             <FormControl required className="formControl">
                 <InputLabel htmlFor="showDate">Choose Show Date:</InputLabel>
@@ -124,6 +160,7 @@ return(
                         </MenuItem>
                     ))}
                 </Select>
+                <FormHelperText className={this.state.showDateRequired}><span className="red">required</span></FormHelperText>
             </FormControl>
             <FormControl required className="formControl">
                 <InputLabel htmlFor="showTime">Choose Show Time:</InputLabel>
@@ -136,10 +173,12 @@ return(
                         </MenuItem>
                     ))}
                 </Select>
+                <FormHelperText className={this.state.showTimeRequired}><span className="red">required</span></FormHelperText>
             </FormControl>
             <FormControl required className="formControl">
                 <InputLabel htmlFor="tickets">Tickets: {"("+this.state.availableTickets+" available)"}</InputLabel>
                 <Input id="tickets" value={this.state.tickets !==0 ? this.state.tickets:""} onChange={this.tikcetsChangeHandler}></Input>
+                <FormHelperText className={this.state.ticketsRequired}><span className="red">required</span></FormHelperText>
             </FormControl>
             <Typography>Unit Price Rs. {this.state.unitPrice}</Typography>
             <Typography>Total Price Rs. {this.state.unitPrice * this.state.tickets}</Typography><br /><br />
