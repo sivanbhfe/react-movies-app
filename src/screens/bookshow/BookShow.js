@@ -32,13 +32,36 @@ class BookShow extends Component {
     constructor() {
         super();
         this.state = {
-            location: ""
+            location: "",
+            language: "",
+            showDate: "",
+            showTime: ""
         }
     }
 
 backtohomeHandler =() =>
 {
     ReactDOM.render(<Home />, document.getElementById("root"));
+}
+
+locationChangeHandler = event =>
+{
+    this.setState({location: event.target.value});
+}
+
+languageChangeHandler = event =>
+{
+    this.setState({language: event.target.value});
+}
+
+showDateChangeHandler = event =>
+{
+    this.setState({showDate: event.target.value});
+}
+
+showTimeChangeHandler = event =>
+{
+    this.setState({showTime: event.target.value});
 }
 
 render(){
@@ -66,6 +89,45 @@ render(){
                                     {location.map(loc => (
                                         <MenuItem key={"loc" + loc.id} value={loc.location}>
                                             {loc.location}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>  
+                            <FormControl required className="formControl">
+                                <InputLabel htmlFor="location">Choose Language:</InputLabel>
+                                <Select
+                                    value={this.state.language}
+                                    onChange={this.languageChangeHandler}
+                                >
+                                    {language.map(lang => (
+                                        <MenuItem key={"lang" + lang.id} value={lang.language}>
+                                            {lang.language}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            <FormControl required className="formControl">
+                                <InputLabel htmlFor="location">Choose Show Date:</InputLabel>
+                                <Select
+                                    value={this.state.showDate}
+                                    onChange={this.showDateChangeHandler}
+                                >
+                                    {showDate.map(sDate => (
+                                        <MenuItem key={"sDate" + sDate.id} value={sDate.showDate}>
+                                            {sDate.showDate}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            <FormControl required className="formControl">
+                                <InputLabel htmlFor="location">Choose Show Time:</InputLabel>
+                                <Select
+                                    value={this.state.showTime}
+                                    onChange={this.showTimeChangeHandler}
+                                >
+                                    {showTime.map(sTime => (
+                                        <MenuItem key={"sTime" + sTime.id} value={sTime.showTime}>
+                                            {sTime.showTime}
                                         </MenuItem>
                                     ))}
                                 </Select>
